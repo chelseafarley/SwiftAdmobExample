@@ -12,6 +12,7 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADFullScreenCont
     
     var bannerView: GADBannerView!
     private var interstitial: GADInterstitialAd?
+    private var rewardedAdHelper = RewardedAdHelper()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADFullScreenCont
         bannerView.delegate = self
         
         loadInterstitial()
+        
+        rewardedAdHelper.loadRewardedAd()
     }
     
     func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
@@ -51,6 +54,10 @@ class ViewController: UIViewController, GADBannerViewDelegate, GADFullScreenCont
         } else {
             print("Ad wasn't ready")
         }
+    }
+    
+    @IBAction func showRewardedAd(_ sender: Any) {
+        rewardedAdHelper.showRewardedAd(viewController: self)
     }
     
     func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
